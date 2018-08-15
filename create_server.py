@@ -9,7 +9,10 @@ VULTR_BASE = 'https://api.vultr.com/v1/'
 SNAPSHOTID = '你的快照ID'
 SV_DCID = '1'
 VPSPLANID = '201'
-SS_PATH = '你的ss目录路径'  # 到exe
+SS_PATH = '你的ss目录路径'  # 到exe那一级
+SS_PORT = '你的SS端口'
+SS_PASSWORD = '你的SS密码'
+SS_ENCRYPT = '你的SS加密方式'  # 字符串全拼 e.g xchacha20-ietf-poly1305
 
 def vultr_comm_handler(url, method, headers=None, data=None, params=None):
     if method == 'GET':
@@ -116,9 +119,9 @@ def create_SS_config_file(ipv6):
   "configs": [
     {{
       "server": "{ipv6}",
-      "server_port": 13786,
-      "password": "MToYno3Z8nfTAp2P",
-      "method": "xchacha20-ietf-poly1305",
+      "server_port": "{SS_PORT}",
+      "password": "{SS_PASSWORD}",
+      "method": "{SS_ENCRYPT}",
       "plugin": "",
       "plugin_opts": "",
       "plugin_args": "",
