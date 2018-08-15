@@ -7,5 +7,5 @@ pip install requirments.txt
 
 vultr 提前建好已经安装完酸s的快照
 
-开机自启动： windows自带的计划任务，或者 python快捷方式+脚本路径的命令行
+开机自启动： windows自带的计划任务，或者 python+脚本路径的快捷方式放到附件\启动
 
