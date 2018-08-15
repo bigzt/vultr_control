@@ -2,7 +2,7 @@ import requests
 import time
 import os
 
-APIKEY = '你的API KEY'
+APIKEY = '你的vultr API KEY'
 
 AUTH_HEADER = {'API-KEY': APIKEY}
 VULTR_BASE = 'https://api.vultr.com/v1/'
@@ -10,6 +10,9 @@ SNAPSHOTID = '你的快照ID'
 SV_DCID = '1'
 VPSPLANID = '201'
 SS_PATH = '你的ss目录路径'  # 到exe那一级
+IP_TYPE = 'ipv6'  # ipv6/v4 设置，ipv4 改为 'ipv4'
+
+# SS 配置，建议直接从配置文件copy内容到128~178行，保留130行的 {ip} 
 SS_PORT = '你的SS端口'
 SS_PASSWORD = '你的SS密码'
 SS_ENCRYPT = '你的SS加密方式'  # 字符串全拼 e.g xchacha20-ietf-poly1305
@@ -86,7 +89,10 @@ def gen_new_server():
             ip.append(server_list[sid].get('main_ip'))
             v6ip.append(server_list[sid].get('v6_main_ip'))
         print(f"already have servers, SUBID: {subid}, IP: {ip} V6IP: {v6ip}")
-        create_SS_config_file(v6ip[0])
+        if IP_TYPE == 'ipv6'：
+            create_SS_config_file(v6ip[0])
+        else:
+            create_SS_config_file(ip[0])
     else:
         check_region()
         check_plans()
@@ -107,18 +113,21 @@ def gen_new_server():
             ipv4 = server_list[newsid].get('main_ip')
             ipv6 = server_list[newsid].get('v6_main_ip')
             print(f"new server create, SUBID: {newsid}, IP: {ipv4} V6IP: {ipv6}")
-            create_SS_config_file(ipv6)
+            if IP_TYPE == 'ipv6'：
+                create_SS_config_file(ipv6)
+            else:
+                create_SS_config_file(ipv4)
         except Exception:
             print(f'服务器创建失败，vultr返回值{result}')
 
 
-def create_SS_config_file(ipv6):
+def create_SS_config_file(ip):
     print(f'正在改写SS配置')
     config_file = SS_PATH + '/gui-config.json'
     text = f"""{{
   "configs": [
     {{
-      "server": "{ipv6}",
+      "server": "{ip}",
       "server_port": "{SS_PORT}",
       "password": "{SS_PASSWORD}",
       "method": "{SS_ENCRYPT}",
