@@ -69,12 +69,7 @@ def check_region():
     global SV_DCID
     result = get_regions_list()
     if result[SV_DCID]['name'] != 'Silicon Valley':
-        for dcid in result.keys():
-            if result[dcid]['name'] == 'Silicon Valley':
-                SV_DCID = dcid
-                break
-        else:
-            raise ValueError('vultr修改了机房DCID！')
+        raise ValueError('vultr修改了机房DCID！')
     return True
 
 
