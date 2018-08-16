@@ -182,6 +182,7 @@ def create_SS_config_file(ip):
     print('正在启动SS client')
     os.startfile(f"{SS_PATH}/Shadowsocks.exe")
 
+if __name__ == '__main__':
+    gen_new_server()
+    os.system('pause')
 
-gen_new_server()
-os.system('pause')
