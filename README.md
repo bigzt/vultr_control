@@ -5,7 +5,7 @@ VULTR python自建服务器启动酸S脚本
 需求：python3.6+
 pip install requirments.txt
 
-vultr 提前建好已经安装完酸s的快照
+vultr 提前建好已经安装完酸s的快照，并开启API控制
 
 开机自启动： windows自带的计划任务，或者 python+脚本路径的快捷方式放到附件\启动
 
