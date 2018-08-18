@@ -24,3 +24,4 @@ def destory_server():
 
 if __name__ == '__main__':
     destory_server()
+    os.system('pause')
